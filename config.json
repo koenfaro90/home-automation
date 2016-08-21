@@ -1,0 +1,25 @@
+{
+	"images" : ["node-base", "kafka"],
+	"containers": [
+		{
+			"name": "kafka",
+			"image": "kafka",
+			"type": "kafka",
+			"startDelay": 15000,
+			"sequence": 1
+		},
+		{
+			"name": "publisher",
+			"image": "node-base",
+			"type": "nodejs",
+			"service": "publisher",
+			"sequence": 2
+		},{
+			"name": "subscriber",
+			"image": "node-base",
+			"type": "nodejs",
+			"service": "subscriber",
+			"sequence": 2
+		}
+	]
+}
