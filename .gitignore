@@ -1,0 +1,4 @@
+node_modules/
+services/*/node_modules/
+services/*/config.json
+shared/*/node_modules/
