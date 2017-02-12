@@ -6,4 +6,4 @@
 ## 3: Zookeeper host
 npm install /home/app/services/$1/
 node /home/app/shared/prepare.js $1 $2
-forever --workingDir  /home/app/services/$1/ /home/app/services/$1/app.js
+forever --workingDir  /home/app/services/$1/ --watchDirectory /home/app/services/$1/ -l /var/log/service.log /home/app/services/$1/app.js

@@ -62,7 +62,7 @@ _.each(config.containers, function(cnt) {
 						return dockerUtil.runCommandAsPromise('docker start ' + container.name).then(function() {
 							if (container.service) {
 								// first get the zookeeper IP
-								return dockerUtil.runCommandAsPromise('docker exec kafka /bin/bash -c \'ip addr | grep inet | grep eth0 | grep -E -o \\"([0-9]{1,3}[.]){3}[0-9]{1,3}\\"\'').then(function(zooKeeperHost) {
+								return dockerUtil.runCommandAsPromise('docker exec kafka /bin/bash -c \'ip addr | grep inet | grep eth0 | grep -E -o "([0-9]{1,3}[.]){3}[0-9]{1,3}"\'').then(function(zooKeeperHost) {
 									return dockerUtil.runCommandAsPromise('docker exec -d -t ' + container.name + ' /bin/bash -c "/home/app/run_service.sh ' + container.service + ' ' + zooKeeperHost.trim() + ':2181"');
 								});
 							} else if (container.startDelay) {
@@ -81,7 +81,7 @@ _.each(config.containers, function(cnt) {
 					var containerId = stdout.trim();
 					return dockerUtil.renameContainer(containerId, container.name).then(function() {
 						if (container.service) {
-							return dockerUtil.runCommandAsPromise('docker exec kafka /bin/bash -c \'ip addr | grep inet | grep eth0 | grep -E -o \\"([0-9]{1,3}[.]){3}[0-9]{1,3}\\"\'').then(function(zooKeeperHost) {
+							return dockerUtil.runCommandAsPromise('docker exec kafka /bin/bash -c \'ip addr | grep inet | grep eth0 | grep -E -o "([0-9]{1,3}[.]){3}[0-9]{1,3}"\'').then(function(zooKeeperHost) {
 								return dockerUtil.runCommandAsPromise('docker exec -d -t ' + container.name + ' /bin/bash -c "git clone https://github.com/koenfaro90/home-automation /home/app/ && /home/app/run_service.sh ' + container.service + ' ' + zooKeeperHost.trim() + ':2181"');
 							});
 						} else if (container.startDelay) {

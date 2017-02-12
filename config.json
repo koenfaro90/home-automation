@@ -13,7 +13,10 @@
 			"image": "node-base",
 			"type": "nodejs",
 			"service": "publisher",
-			"sequence": 2
+			"sequence": 2,
+			"portMappings": {
+				"80": "8080"
+			}
 		},{
 			"name": "subscriber",
 			"image": "node-base",

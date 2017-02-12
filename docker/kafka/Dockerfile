@@ -15,11 +15,13 @@ RUN apt-get -qq update && \
     wget -q http://apache.mirrors.spacedump.net/kafka/"$KAFKA_VERSION"/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION".tgz -O /tmp/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION".tgz && \
     tar xfz /tmp/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION".tgz -C /opt && \
     rm /tmp/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION".tgz && \
-	wget -q https://www.faro.tech/files/kafka-manager-1.3.1.6.zip -O /tmp/kafka-manager.zip && \
+	wget -q http://www.faro.tech/files/kafka-manager-1.3.1.6.zip -O /tmp/kafka-manager.zip && \
 	unzip -q /tmp/kafka-manager.zip -d /home/ && \
 	rm /tmp/kafka-manager.zip
 
 ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
+
+RUN chmod +x /usr/bin/start-kafka.sh && chmod 777 /usr/bin/start-kafka.sh
 
 # Supervisor config
 ADD supervisor/zookeeper.conf supervisor/kafka.conf supervisor/kafka-manager.conf /etc/supervisor/conf.d/
